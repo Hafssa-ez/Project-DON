@@ -1,0 +1,96 @@
+/* Formulaire d'ajout d'article */
+.container {
+    flex: 1;
+    max-width: 700px;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 80px;
+    color: #27316f;
+}
+
+.container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.container .title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 300px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #5ab2af, #e6b800);
+}
+
+.input-box {
+    margin-bottom: 15px;
+}
+
+.input-box span.details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.input-box input,
+.input-box select,
+.input-box textarea {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.input-box textarea {
+    height: 100px;
+    padding: 10px;
+}
+
+.input-box input:focus,
+.input-box select:focus,
+.input-box textarea:focus {
+    border-color: #5ab2af;
+}
+
+.button input {
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #5ab2af, #e6b800);
+}
+
+.button input:hover {
+    background: linear-gradient(-135deg, #5ab2af, #6c757d);
+}
+
+footer {
+    background-color: #c1d3dc;
+    color: #27316f;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #27316f;
+}
