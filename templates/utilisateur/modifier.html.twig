@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Modifier l'utilisateur - Project DON
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Modifier l'utilisateur</h2>
+
+    {# Messages flash #}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <form action="{{ path('utilisateur_modifier', { id: utilisateur.id }) }}" method="post">
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Nom</span>
+                <input type="text" name="nom" value="{{ utilisateur.nom }}" required>
+            </div>
+            <div class="input-box">
+                <span class="details">Prénom</span>
+                <input type="text" name="prenom" value="{{ utilisateur.prenom }}" required>
+            </div>
+            <div class="input-box">
+                <span class="details">Email</span>
+                <input type="email" name="email" value="{{ utilisateur.email }}" required>
+            </div>
+            <div class="input-box">
+                <span class="details">Pseudo</span>
+                <input type="text" name="pseudo" value="{{ utilisateur.pseudo }}" required>
+            </div>
+            <div class="input-box">
+                <span class="details">Téléphone</span>
+                <input type="tel" name="telephone" value="{{ utilisateur.telephone }}" required>
+            </div>
+           
+        </div>
+        <div class="button">
+            <input type="submit" value="Modifier">
+        </div>
+    </form>
+</div>
+{% endblock %}

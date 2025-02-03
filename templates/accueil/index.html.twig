@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Accueil - Project DON
+{% endblock %}
+
+{% block content %}
+    <!-- Slogan Section -->
+    <section class="slogan-container">
+        <img src="{{ asset('images/slogan.png') }}" alt="Slogan" class="slogan-image">
+        <div class="slogan-text">Donner une seconde vie à vos objets</div>
+    </section>
+
+    <!-- Section Nouveaux Articles -->
+    <h3 class="section-title">Nouveaux Articles</h3>
+    <div class="container mt-4 new-items-section">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for article in articles %}
+                <div class="col">
+                    <div class="card h-100">
+                       <img src="{{ asset('images/' ~ article.images) }}" class="card-img-top" alt="{{ article.titre }}">
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.titre }}</h5>
+                            <p class="card-text">{{ article.description }}</p>
+                            <p class="card-text"><strong>État :</strong> {{ article.etat }}</p>
+                            <p class="card-text"><strong>Date d'ajout :</strong> {{ article.dateAjout|date('d M Y') }}</p>
+                            <a href="#" class="btn btn-custom">Demander</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucun article disponible pour le moment.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Section Articles Réservés -->
+    <h3 class="section-title">Articles Réservés</h3>
+    <div class="container mt-4 reserved-items-section">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for article in reserved_articles %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="{{ asset('build/images/' ~ article.images) }}" class="card-img-top" alt="{{ article.titre }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.titre }}</h5>
+                            <p class="card-text">{{ article.description }}</p>
+                            <p class="card-text"><strong>État :</strong> {{ article.etat }}</p>
+                            <p class="card-text"><strong>Date de réservation :</strong> {{ article.dateReservation|date('d M Y') }}</p>
+                            <button class="btn btn-secondary" disabled>Réservé</button>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucun article réservé pour le moment.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Section Contact -->
+    <section id="contact" class="container">
+        <div class="title">Contactez-nous</div>
+        <div class="content">
+            <!-- Affichage des messages flash -->
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success mt-3">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger mt-3">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <form method="post" action="{{ path('contact_submit') }}">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Nom</span>
+                        <input type="text" name="nom" placeholder="Votre nom" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="email" name="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Sujet</span>
+                        <input type="text" name="sujet" placeholder="Sujet de votre message" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Message</span>
+                        <textarea name="message" placeholder="Écrivez votre message ici..." required></textarea>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Envoyer">
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
