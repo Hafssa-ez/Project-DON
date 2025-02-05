@@ -8,9 +8,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur implements PasswordAuthenticatedUserInterface
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -49,25 +50,17 @@ class Utilisateur implements PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: "Le mot de passe est obligatoire.")]
     #[Assert\Length(min: 6, minMessage: "Le mot de passe doit contenir au moins 6 caractères.")]
     #[Groups('utilisateur:list')]
-    private ?string $mot_passe = null;
-
-    /**
-     * **Champ non stocké en base de données**
-     * Utilisé uniquement pour valider que les deux mots de passe sont identiques
-     */
-    #[Assert\NotBlank(message: "La confirmation du mot de passe est obligatoire.")]
-    #[Assert\EqualTo(propertyPath: "mot_passe", message: "Les mots de passe ne correspondent pas.")]
-    #[Groups('utilisateur:list')]
-    private ?string $confirmationMotPasse = null;
+    private string $password;
 
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Article::class, orphanRemoval: true)]
     #[Groups('utilisateur:list')]
     private Collection $articles;
 
-    #[ORM\ManyToOne(targetEntity: Role::class, inversedBy: 'utilisateurs')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Groups('utilisateur:list')]
-    private ?Role $role = null;
+  
+
+    //#[ORM\Column] // Cette annotation définit la propriété suivante comme une colonne de la table
+    private array $roles = []; // Propriété privée pour stocker les rôles de l'utilisateur sous forme de tableau
+
 
     public function __construct()
     {
@@ -136,25 +129,14 @@ class Utilisateur implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMotPasse(): ?string
+    public function getPassword(): ?string
     {
-        return $this->mot_passe;
+        return $this->password;
     }
 
-    public function setMotPasse(string $mot_passe): self
+    public function setPassword(string $password): self
     {
-        $this->mot_passe = $mot_passe;
-        return $this;
-    }
-
-    public function getConfirmationMotPasse(): ?string
-    {
-        return $this->confirmationMotPasse;
-    }
-
-    public function setConfirmationMotPasse(?string $confirmationMotPasse): self
-    {
-        $this->confirmationMotPasse = $confirmationMotPasse;
+        $this->password = $password;
         return $this;
     }
 
@@ -182,20 +164,26 @@ class Utilisateur implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): ?Role
+
+
+    public function getRoles(): array
     {
-        return $this->role;
+        $roles = $this->roles; // On copie les rôles existants de l'utilisateur
+        return array_unique($roles); // On retourne les rôles sans doublons
     }
 
-    public function setRole(?Role $role): self
+    // Méthode pour définir les rôles de l'utilisateur
+    public function setRoles(array $roles): self { 
+        $this->roles = $roles; // On assigne les rôles passés en argument à la propriété $roles
+        return $this; 
+    }
+    public function eraseCredentials(): void 
     {
-        $this->role = $role;
-        return $this;
     }
 
-    // Implémentation de PasswordAuthenticatedUserInterface
-    public function getPassword(): ?string
+    // Méthode requise par l'interface UserInterface. Elle renvoie l'identifiant de l'utilisateur (ici, l'email)
+    public function getUserIdentifier(): string 
     {
-        return $this->mot_passe;
+        return $this->pseudo; // Retourne l'email de l'utilisateur comme identifiant unique
     }
 }

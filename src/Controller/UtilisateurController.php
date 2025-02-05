@@ -46,10 +46,10 @@ class UtilisateurController extends AbstractController
             $pseudo = $data['pseudo'] ?? null;
             $email = $data['email'] ?? null;
             $telephone = $data['telephone'] ?? null;
-            $motPasse = $data['mot_passe'] ?? null;
+            $password = $data['password'] ?? null;
             $roleNom = $data['role'] ?? 'Donneur';
 
-            if (!$nom || !$prenom || !$email || !$pseudo || !$motPasse || !$telephone) {
+            if (!$nom || !$prenom || !$email || !$pseudo || !$password || !$telephone) {
                 $errorMessage = 'Tous les champs obligatoires doivent être remplis.';
                 if ($request->headers->get('Accept') === 'application/json') {
                     return $this->json(['error' => $errorMessage], 400);
@@ -67,7 +67,7 @@ class UtilisateurController extends AbstractController
                 ->setPseudo($pseudo)
                 ->setEmail($email)
                 ->setTelephone($telephone)
-                ->setMotPasse($passwordHasher->hashPassword($utilisateur, $motPasse))
+                ->setPassword($passwordHasher->hashPassword($utilisateur, $password))
                 ->setRole($role);
 
             $entityManager->persist($role);
@@ -103,8 +103,8 @@ class UtilisateurController extends AbstractController
                 ->setEmail($data['email'] ?? $utilisateur->getEmail())
                 ->setTelephone($data['telephone'] ?? $utilisateur->getTelephone());
 
-            if (!empty($data['mot_passe'])) {
-                $utilisateur->setMotPasse($passwordHasher->hashPassword($utilisateur, $data['mot_passe']));
+            if (!empty($data['password'])) {
+                $utilisateur->setPassword($passwordHasher->hashPassword($utilisateur, $data['password']));
             }
 
             $entityManager->flush();

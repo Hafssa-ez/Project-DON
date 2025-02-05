@@ -4,12 +4,12 @@
     Formulaire d'inscription - Project DON
 {% endblock %}
 
-
 {% block content %}
+<div id="hr" ></div>
 <div class="container-inscription">
     <div class="title">Formulaire d'Inscription</div>
 
-    {# Affichage des messages d'erreur globaux #}
+    {# Affichage des messages de notification (erreurs ou succès) #}
     {% for message in app.flashes('error') %}
         <div class="alert alert-danger">{{ message }}</div>
     {% endfor %}
@@ -20,51 +20,73 @@
     <div class="content">
         <form action="{{ path('utilisateur_create') }}" method="post">
             <div class="user-details">
+                {# Nom #}
                 <div class="input-box">
                     <span class="details">Votre Nom</span>
                     <input type="text" name="nom" placeholder="EX: Kany" required>
                 </div>
+
+                {# Prénom #}
                 <div class="input-box">
                     <span class="details">Votre Prénom</span>
                     <input type="text" name="prenom" placeholder="EX: Jane" required>
                 </div>
+
+                {# Email #}
                 <div class="input-box">
                     <span class="details">Votre Email</span>
                     <input type="email" name="email" placeholder="EX: kanyjane@gmail.com" required>
                 </div>
+
+                {# Pseudo #}
                 <div class="input-box">
                     <span class="details">Votre Pseudo</span>
                     <input type="text" name="pseudo" placeholder="EX: Kany_Jane" required>
                 </div>
+
+                {# Téléphone #}
                 <div class="input-box">
                     <span class="details">Votre Téléphone</span>
-                    <input type="tel" name="telephone" placeholder="EX: 0612131415" required>
+                    <input type="tel" name="telephone" placeholder="EX: 0612131415" pattern="[0-9]{10}" required>
                 </div>
+
+                {# Mot de Passe #}
                 <div class="input-box">
                     <span class="details">Votre Mot de Passe</span>
-                    <input type="password" name="mot_passe" placeholder="********" required>
+                    <input type="password" name="password" placeholder="********" required>
                 </div>
             </div>
+
+            {# Rôle (Boutons Radio) #}
             <div class="gender-details">
+
+                <input type="radio" name="role" value="ROLE_DONNEUR" id="dot-1" checked>
+                <input type="radio" name="role" value="ROLE_RECEVEUR" id="dot-2">
+
                 <span class="gender-title">Votre Rôle</span>
                 <div class="category">
-                    <label>
-                        <input type="radio" name="role" value="Donneur" required>
+
+                    <label for="dot-1">
                         <span class="dot one"></span>
                         <span class="gender">Donneur</span>
                     </label>
-                    <label>
-                        <input type="radio" name="role" value="Receveur" required>
+                    <!-- Label for Female -->
+                    <label for="dot-2">
                         <span class="dot two"></span>
                         <span class="gender">Receveur</span>
                     </label>
+
                 </div>
             </div>
+
+            {# Bouton Soumettre #}
             <div class="button">
                 <input type="submit" value="S'inscrire">
             </div>
+
             <p>Avez-vous déjà un compte ? <a href="#">Se connecter</a></p>
         </form>
     </div>
 </div>
+<div id="hr" ></div>
 {% endblock %}

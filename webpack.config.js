@@ -5,7 +5,6 @@ Encore
     .setPublicPath('/build') // URL publique pour accéder aux fichiers générés
 
     // Entrées CSS
-    .addStyleEntry('inscription', './assets/styles/inscription.css') // Styles spécifiques à l'inscription
     .addStyleEntry('style', './assets/styles/style.css') // Styles globaux
 
     // Configuration de base

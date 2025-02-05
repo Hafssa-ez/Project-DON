@@ -20,10 +20,12 @@ body {
     box-shadow: 0px 0px 8px rgba(90, 178, 175, 0.5);
     outline: none;
 }
-
+/*
 .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
     min-height: 500px;
 }
+*/
+/* ==================================================================================================== */
 
 .navbar {
     padding: 0 !important;
@@ -98,6 +100,11 @@ nav .navbar {
     background-color: #e6b800;
     color: #27316f;
 }
+
+
+/* ================================================= end nav =================================================== */
+
+/* ==================================================================================================== */
 
 /* Section Slogan */
 .slogan-container {
@@ -294,6 +301,12 @@ nav .navbar {
     background-color: #3a9994;
 }
 
+
+/* ==============================================end accueil====================================================== */
+
+
+/* ==================================================================================================== */
+
 /* Footer */
 footer {
     background-color: #c1d3dc;
@@ -310,6 +323,12 @@ footer a {
 }
 
 
+
+/* ================================================end footer==================================================== */
+
+
+
+/* ==================================================================================================== */
 
 /* Design responsive */
 @media (max-width: 768px) {
@@ -384,13 +403,10 @@ footer a {
 }
 
 
+/* ==================================================end media query================================================== */
 
 
-
-
-
-
-
+/* ==================================================================================================== */
 
 .container-inscription {
     flex: 1;
@@ -400,7 +416,7 @@ footer a {
      padding: 25px 30px;
      border-radius: 5px;
      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-     margin-top: 80px;
+     margin: auto;
      color: #27316f;
    }
    
@@ -495,7 +511,6 @@ footer a {
      background: #5ab2af;
      border-color: #d9d9d9;
    }
-   
    form input[type="radio"] {
      display: none;
    }
@@ -530,4 +545,47 @@ footer a {
         border: 1px solid  ;
         border-radius: 5px;
    }
+
    
+   /* Responsive media query code for mobile devices */
+@media(max-width: 584px) {
+    .container {
+      max-width: 100%;
+    }
+  
+    form .user-details .input-box {
+      margin-bottom: 15px;
+      width: 100%;
+    }
+  
+    form .category {
+      width: 100%;
+    }
+  
+    .content form .user-details {
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+  
+    .user-details::-webkit-scrollbar {
+      width: 5px;
+    }
+   
+    
+  }
+  
+  @media(max-width: 459px) {
+    .container .content .category {
+      flex-direction: column;
+    }
+   
+    
+  }
+
+
+#hr {
+padding-bottom: 80px;
+}
+   
+/* =====================================end inscription =============================================================== */
+

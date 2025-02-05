@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Page de connexion - Project DON
+{% endblock %}
+{% block body %}
+
+
+<div id="hr" ></div>
+    <!-- Formulaire de connexion -->
+    <div class="container">
+        <div class="title">Connectez-vous</div>
+        <div class="content">
+            <form method="post" action="{{ path('app_login') }}">
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details"> Pseudo</span>
+                        <input type="text" name="_username" placeholder="EX: pseudo" value="{{ pseudo }}" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Mot de passe</span>
+                        <input type="password" name="_password" placeholder="********" required>
+                    </div>
+                </div>
+
+                <div class="button">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <input type="submit" value="Se connecter">
+                </div>
+
+                <p>Vous n'avez pas de compte ? <a href="{{ path('utilisateur_create') }}">S'inscrire</a></p>
+            </form>
+        </div>
+    </div>
+    <div id="hr" ></div>
+    <div id="hr" ></div>
+{% endblock %}
