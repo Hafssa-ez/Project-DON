@@ -3,3 +3,30 @@ controllers:
     path: ../src/Controller/
     namespace: App\Controller
   type: attribute
+
+default:
+  path: /
+  controller: App\Controller\ArticleController::accueil
+  methods: [GET]
+home:
+  path: /home
+
+article_liste:
+  path: /articles
+  controller: App\Controller\ArticleController::liste
+  methods: [GET]
+
+ajouter_article:
+  path: /articles/ajouter
+  controller: App\Controller\ArticleController::ajouter
+  methods: [GET, POST]
+
+article_modifier:
+  path: /articles/{id}/modifier
+  controller: App\Controller\ArticleController::modifier
+  methods: [GET, POST]
+
+article_supprimer:
+  path: /articles/{id}/supprimer
+  controller: App\Controller\ArticleController::supprimer
+  methods: [POST]

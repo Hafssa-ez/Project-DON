@@ -62,11 +62,14 @@ nav .navbar {
 .nav-container {
     max-width: 600px;  
     margin: 0 auto;   
-    padding: 10px 0;   
+    padding: 10px ;
+    border-radius: 8px;
+    margin-bottom: 20px;   
 }
 
 .nav-pills {
-    gap: 10px;  
+    gap: 10px; 
+    display: flex; 
 }
 
 .nav-pills .nav-link {
@@ -74,11 +77,22 @@ nav .navbar {
     text-align: center;
     padding: 10px 15px;
     margin-right: 10px; 
-    min-width: 150px; 
+    min-width: 150px;
+    white-space: nowrap; 
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px; 
 }
 
 .nav-pills .nav-link:last-child {
     margin-right: 0; 
+}
+.nav-pills .dropdown {
+    display: inline-block;
+}
+
+.dropdown-menu {
+    min-width: 200px;
 }
 
 /* Navbar secondaire */
@@ -233,7 +247,7 @@ nav .navbar {
 }
 
 #contact .user-details {
-    display: grid;
+   
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
@@ -547,45 +561,219 @@ footer a {
    }
 
    
-   /* Responsive media query code for mobile devices */
-@media(max-width: 584px) {
-    .container {
-      max-width: 100%;
-    }
-  
-    form .user-details .input-box {
-      margin-bottom: 15px;
-      width: 100%;
-    }
-  
-    form .category {
-      width: 100%;
-    }
-  
-    .content form .user-details {
-      max-height: 300px;
-      overflow-y: scroll;
-    }
-  
-    .user-details::-webkit-scrollbar {
-      width: 5px;
-    }
-   
-    
-  }
-  
-  @media(max-width: 459px) {
-    .container .content .category {
-      flex-direction: column;
-    }
-   
-    
-  }
-
-
 #hr {
 padding-bottom: 80px;
 }
    
 /* =====================================end inscription =============================================================== */
 
+
+
+/* Formulaire d'ajout d'article */
+.container-article {
+    flex: 1;
+    max-width: 700px;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 80px;
+    color: #27316f;
+}
+
+.container-article .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.container-article .title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 300px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #5ab2af, #e6b800);
+}
+
+.input-box {
+    margin-bottom: 15px;
+}
+
+.input-box span.details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.input-box input,
+.input-box select,
+.input-box textarea {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.input-box textarea {
+    height: 100px;
+    padding: 10px;
+}
+
+.input-box input:focus,
+.input-box select:focus,
+.input-box textarea:focus {
+    border-color: #5ab2af;
+}
+
+.button input {
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #5ab2af, #e6b800);
+}
+
+.button input:hover {
+    background: linear-gradient(-135deg, #5ab2af, #6c757d);
+}
+
+
+
+
+
+/* =====================================end ajout article =============================================================== */
+
+
+
+/* ====================================   details articles ============================ */
+.article-details-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color: #f7f7f7;
+    margin-top: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Image de l'article */
+.article-image {
+    flex: 1;
+    max-width: 45%;
+    margin-right: 2rem;
+}
+
+.article-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Détails de l'article */
+.article-details {
+    flex: 1;
+    max-width: 50%;
+    color: #27316f;
+}
+
+.article-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #27316f;
+    margin-bottom: 1rem;
+}
+
+.article-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Détails du donneur */
+.user-details {
+    margin-bottom: 2rem;
+}
+
+.user-details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.user-details p {
+    font-size: 1rem;
+}
+
+/* Section de demande de réservation */
+.request-section {
+    margin-top: 2rem;
+}
+
+.request-section p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Bouton Réserver */
+.btn-custom-reserver {
+    background-color: #e6b800;
+    color: #27316f;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 0.2s, transform 0.2s;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.btn-custom-reserver:hover {
+    background-color: #3a9994;
+    transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+    .article-details-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .article-image {
+        max-width: 100%;
+        margin-right: 0;
+    }
+
+    .article-details {
+        max-width: 100%;
+    }
+
+    .article-title {
+        font-size: 1.5rem;
+    }
+
+    .article-description {
+        font-size: 1rem;
+    }
+
+    .request-section p {
+        font-size: 1rem;
+    }
+
+    .btn-custom-reserver {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+}

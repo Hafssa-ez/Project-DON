@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
@@ -51,23 +52,21 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 6, minMessage: "Le mot de passe doit contenir au moins 6 caractères.")]
     #[Groups('utilisateur:list')]
     private string $password;
-
+    
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Article::class, orphanRemoval: true)]
     #[Groups('utilisateur:list')]
     private Collection $articles;
 
-  
-
-    //#[ORM\Column] // Cette annotation définit la propriété suivante comme une colonne de la table
-    private array $roles = []; // Propriété privée pour stocker les rôles de l'utilisateur sous forme de tableau
-
+    #[ORM\Column(type: "json")]
+    private array $roles = []; 
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->roles = ['ROLE_DONNEUR']; 
     }
 
-    // Getters et Setters
+   
 
     public function getId(): ?int
     {
@@ -129,7 +128,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -164,26 +163,23 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
-
     public function getRoles(): array
     {
-        $roles = $this->roles; // On copie les rôles existants de l'utilisateur
-        return array_unique($roles); // On retourne les rôles sans doublons
+        return $this->roles ?? ['ROLE_DONNEUR']; 
     }
 
-    // Méthode pour définir les rôles de l'utilisateur
-    public function setRoles(array $roles): self { 
-        $this->roles = $roles; // On assigne les rôles passés en argument à la propriété $roles
-        return $this; 
+    public function setRoles(?array $roles): self
+    {
+        $this->roles = $roles ?? ['ROLE_DONNEUR']; 
+        return $this;
     }
+
     public function eraseCredentials(): void 
     {
     }
 
-    // Méthode requise par l'interface UserInterface. Elle renvoie l'identifiant de l'utilisateur (ici, l'email)
     public function getUserIdentifier(): string 
     {
-        return $this->pseudo; // Retourne l'email de l'utilisateur comme identifiant unique
+        return $this->pseudo; 
     }
 }

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Articles{% endblock %}
+
+{% block body %}
+    <h2>Liste des articles</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>État</th>
+                <th>Statut</th>
+                <th>Donneur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.titre }}</td>
+                    <td>{{ article.description }}</td>
+                    <td>{{ article.etat }}</td>
+                    <td>{{ article.statut }}</td>
+                    <td>{{ article.utilisateur.pseudo }}</td>
+                    <td>
+                        <a href="{{ path('article_modifier', {'id': article.id}) }}" class="btn btn-warning">Modifier</a>
+                        <form action="{{ path('article_supprimer', {'id': article.id}) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="6">Aucun article trouvé.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

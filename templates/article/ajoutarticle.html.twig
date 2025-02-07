@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Article{% endblock %}
+
+{% block content %}
+    <div class="container-article">
+        <div class="title">Ajouter un Article</div>
+        <div class="content">
+            <form action="{{ path('ajouter_article') }}" method="POST" enctype="multipart/form-data">
+                
+                <div class="input-box">
+                    <span class="details">Titre de l'Article</span>
+                    <input type="text" id="titre" name="titre" placeholder="Ex: Canapé en cuir" required>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Ajouter une Image</span>
+                    <input type="file" id="image" name="image" accept="image/*" required>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Petite Description</span>
+                    <textarea id="description" name="description"
+                        placeholder="Ex: Canapé confortable en cuir, pratiquement neuf..." required></textarea>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">État de l'Article</span>
+                    <select id="etat" name="etat" required>
+                        <option value="excellent">Excellent état</option>
+                        <option value="bon état">Bon état</option>
+                        <option value="État moyen">État moyen</option>
+                        <option value="État médicore">État médiocre</option>
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Ville</span>
+                    <input type="text" id="ville" name="ville" placeholder="Ex: Paris" required>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Catégorie</span>
+                    <select id="categorie" name="categorie" required>
+                        {% for categorie in categories %}
+                            <option value="{{ categorie.id }}">{{ categorie.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="button">
+                    <input type="submit" value="Ajouter l'Article">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="hr" ></div>
+<div id="hr"></div>
 <div class="container">
     <h2>Liste des Utilisateurs</h2>
 
@@ -25,7 +25,7 @@
                 <th>Pseudo</th>
                 <th>Email</th>
                 <th>Téléphone</th>
-                <th>Rôle</th>
+                <th>Rôles</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,10 +37,11 @@
                     <td>{{ utilisateur.pseudo }}</td>
                     <td>{{ utilisateur.email }}</td>
                     <td>{{ utilisateur.telephone }}</td>
-                    <td>{{ utilisateur.role.nom }}</td>
+                    <td>{{ utilisateur.roles|join(', ') }}</td> {# ✅ Affichage des rôles sous forme de liste séparée par des virgules #}
                     <td>
                         <a href="{{ path('utilisateur_modifier', { id: utilisateur.id }) }}" class="btn btn-primary">Modifier</a>
                         <form action="{{ path('utilisateur_delete', { id: utilisateur.id }) }}" method="post" style="display:inline;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ utilisateur.id) }}"> {# ✅ Ajout du token CSRF #}
                             <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
                     </td>
@@ -53,6 +54,6 @@
         </tbody>
     </table>
 </div>
-<div id="hr" ></div>
-<div id="hr" ></div>
+<div id="hr"></div>
+<div id="hr"></div>
 {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un Article{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="title">Modifier l'Article</div>
+        <div class="content">
+            <form action="{{ path('article_modifier', {'id': article.id}) }}" method="POST">
+
+                <div class="input-box">
+                    <label for="titre" class="details">Titre de l'Article</label>
+                    <input type="text" id="titre" name="titre" class="form-control" value="{{ article.titre }}" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="description" class="details">Petite Description</label>
+                    <textarea id="description" name="description" class="form-control" required>{{ article.description }}</textarea>
+                </div>
+
+                <div class="input-box">
+                    <label for="etat" class="details">État de l'Article</label>
+                    <select id="etat" name="etat" class="form-select" required>
+                        <option value="excellent" {% if article.etat == 'excellent' %}selected{% endif %}>Excellent état</option>
+                        <option value="good" {% if article.etat == 'good' %}selected{% endif %}>Bon état</option>
+                        <option value="fair" {% if article.etat == 'fair' %}selected{% endif %}>État moyen</option>
+                        <option value="poor" {% if article.etat == 'poor' %}selected{% endif %}>État médiocre</option>
+                    </select>
+                </div>
+
+                <div class="button">
+                    <button type="submit" class="btn btn-primary">Modifier l'Article</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
