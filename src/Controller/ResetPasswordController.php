@@ -87,7 +87,7 @@ class ResetPasswordController extends AbstractController
         $token = $this->getTokenFromSession();
 
         if (null === $token) {
-            throw $this->createNotFoundException('No reset password token found in the URL or in the session.');
+            throw $this->createNotFoundException('Le lien de réinitialisation du mot de passe est invalide ou a expiré. Veuillez demander un nouveau lien.');
         }
 
         try {
@@ -121,7 +121,7 @@ class ResetPasswordController extends AbstractController
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('reset_password/reset.html.twig', [
