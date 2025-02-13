@@ -3,32 +3,27 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Uuid;
-use Symfony\Component\Uid\UuidV7;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use App\Enum\StatutDemande;
 
-#[ORM\Entity(repositoryClass: UtilisateurArticleRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: 'utilisateur_article')]
 class UtilisateurArticle
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     #[ORM\Column(type: 'uuid', unique: true)]
-    public readonly Uuid $id;
+    public readonly UuidInterface $id;
 
-    #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'demandesDonneur')]
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
     #[ORM\JoinColumn(nullable: false)]
-    public readonly Utilisateur $donneur;
-
-    #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'demandesReceveur')]
-    #[ORM\JoinColumn(nullable: false)]
-    public readonly Utilisateur $receveur;
+    public readonly Utilisateur $utilisateur;
 
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'demandes')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    public readonly Article $article;
+    private Article $article;
 
     #[ORM\Column(type: 'string', enumType: StatutDemande::class)]
     public StatutDemande $statut;
@@ -39,26 +34,47 @@ class UtilisateurArticle
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     public ?\DateTimeImmutable $updatedAt = null;
 
-    public function __construct(Utilisateur $donneur, Utilisateur $receveur, Article $article)
-    {
-        if (!in_array('ROLE_DONNEUR', $donneur->getRoles(), true)) {
-            throw new \InvalidArgumentException('L’utilisateur doit être un donneur.');
-        }
-        if (!in_array('ROLE_RECEVEUR', $receveur->getRoles(), true)) {
-            throw new \InvalidArgumentException('L’utilisateur doit être un receveur.');
-        }
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private ?\DateTimeImmutable $dateReservation = null;
 
-        $this->id = UuidV7::generate();
-        $this->donneur = $donneur;
-        $this->receveur = $receveur;
+    public function __construct(Utilisateur $utilisateur, Article $article)
+    {
+        $this->id = Uuid::uuid4();
+        $this->utilisateur = $utilisateur;
         $this->article = $article;
-        $this->statut = StatutDemande::DISPONIBLE;
+        $this->statut = StatutDemande::EN_COURS;
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function changerStatut(StatutDemande $nouveauStatut): void
+    public function getArticle(): Article
     {
-        $this->statut = $nouveauStatut;
-        $this->updatedAt = new \DateTimeImmutable();
+        return $this->article;
     }
+
+    public function getUtilisateur(): Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function getCreatedAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function getDateReservation(): ?\DateTimeImmutable
+    {
+        return $this->dateReservation;
+    }
+
+    public function setDateReservation(\DateTimeImmutable $dateReservation): void
+    {
+        $this->dateReservation = $dateReservation;
+    }
+    public function setStatut(StatutDemande $statut): self
+    {
+        $this->statut = $statut;
+        return $this;
+    }
+    
+
 }

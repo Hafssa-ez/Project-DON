@@ -45,6 +45,7 @@ security:
     - { path: ^/articles, roles: [ROLE_ADMIN, ROLE_DONNEUR] } # Liste des articles
     - { path: ^/articles/\d+/modifier, roles: [ROLE_ADMIN, ROLE_DONNEUR] } # Modification d'article
     - { path: ^/articles/\d+/supprimer, roles: [ROLE_ADMIN, ROLE_DONNEUR] } # Suppression d'article
+    # - { path: ^/utilisateurs, roles: [ROLE_ADMIN] } # Suppression d'article
 
     # Réservation limitée aux receveurs
     - { path: ^/articles/\d+/reserver, roles: ROLE_RECEVEUR } # Seuls les receveurs peuvent réserver

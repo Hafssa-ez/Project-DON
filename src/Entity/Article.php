@@ -51,10 +51,22 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class, cascade: ['remove'])]
 private Collection $commentaires;
 
+
+#[ORM\OneToMany(mappedBy: 'article', targetEntity: UtilisateurArticle::class)]
+private Collection $demandes;
+
 public function __construct()
 {
     $this->commentaires = new ArrayCollection();
+    $this->demandes = new ArrayCollection();
 }
+
+public function getDemandes(): Collection
+{
+    return $this->demandes;
+}
+
+
 
 public function getCommentaires(): Collection
 {
@@ -141,7 +153,7 @@ public function removeCommentaire(Commentaire $commentaire): self
         return $this->statut;
     }
 
-    public function setStatut(string $statut): static
+    public function setStatut(string $statut): self
     {
         $this->statut = $statut;
 

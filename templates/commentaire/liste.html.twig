@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des commentaires{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2>Commentaires pour l’article : {{ article.titre }}</h2>
+
+        {% if commentaires is empty %}
+            <p>Aucun commentaire pour l’instant.</p>
+        {% else %}
+            <ul>
+                {% for comm in commentaires %}
+                    <li>
+                        <strong>{{ comm.utilisateur.nom }} :</strong>
+                        {{ comm.message }} ({{ comm.date|date('d/m/Y H:i') }})
+
+                        {% if is_granted('ROLE_ADMIN') or comm.utilisateur == app.user %}
+                            {# Formulaire de suppression #}
+                            <form method="post"
+                                  action="{{ path('commentaire_supprimer_render', {id: comm.id}) }}"
+                                  style="display:inline;"
+                                  onsubmit="return confirm('Supprimer ce commentaire ?');">
+                                <button type="submit" class="btn btn-danger btn-sm">X</button>
+                            </form>
+
+                            {# Lien de modification #}
+                            <a href="{{ path('commentaire_modifier_render', {id: comm.id}) }}"
+                               class="btn btn-warning btn-sm">
+                                Modifier
+                            </a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

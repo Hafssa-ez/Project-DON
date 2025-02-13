@@ -26,16 +26,65 @@
 
                 <!-- Bouton réserver -->
                 <div class="mt-3">
-                  
-                     
-                            <button type="submit" class="btn btn-primary">Demander l'article</button>
+                {% if app.user %}
+    {% if 'ROLE_DONNEUR' not in app.user.roles %}
+        <a href="{{ path('article_demander', { id: article.id }) }}" class="btn btn-primary">
+            Demander l'article
+        </a>
+    {% else %}
+        <p class="text-muted"> En tant que donneur, vous ne pouvez pas demander un article.</p>
+    {% endif %}
+{% else %}
+    <a href="{{ path('app_login') }}" class="btn btn-primary">Connectez-vous pour demander</a>
+{% endif %}
+
+            </div>
                     
                  
-                        <a href="{{ path('app_login') }}" class="btn btn-primary">Connectez-vous pour demander</a>
+                        
                    
-                </div>
-            </div>
+                
         </div>
+ </div>
+
+<hr id="section_commentaires">
+
+<h4>Commentaires</h4>
+
+<!-- Liste des commentaires -->
+{% if article.commentaires is empty %}
+    <p>Aucun commentaire pour l’instant.</p>
+{% else %}
+    <ul>
+    {% for comm in article.commentaires %}
+        <li>
+            <strong>{{ comm.utilisateur.nom }} :</strong>
+            {{ comm.message }}
+            <small>(le {{ comm.date|date('d/m/Y H:i') }})</small>
+
+            {# Boutons modifier/supprimer si c’est l’auteur ou l’admin #}
+            {% if app.user == comm.utilisateur or is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('commentaire_modifier_render', { id: comm.id }) }}" class="btn btn-warning btn-sm">Modifier</a>
+
+                <form method="post"
+                      action="{{ path('commentaire_supprimer_render', { id: comm.id }) }}"
+                      style="display:inline;"
+                      onsubmit="return confirm('Supprimer ce commentaire ?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<!-- Formulaire ajouter un commentaire -->
+{% if app.user and 'ROLE_RECEVEUR' in app.user.roles %}
+    <!-- Vérifiez si article est “reserve” par app.user si vous voulez restreindre encore plus -->
+    <a href="{{ path('commentaire_ajouter_render', { id: article.id }) }}" class="btn btn-primary">Ajouter un commentaire</a>
+{% else %}
+    <p>Connectez-vous en tant que receveur pour commenter.</p>
+{% endif %}
 
        
    

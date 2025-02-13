@@ -60,9 +60,23 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "json")]
     private array $roles = []; 
 
+
+
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: UtilisateurArticle::class)]
+private Collection $demandes;
+
+
+
+public function getDemandes(): Collection
+{
+    return $this->demandes;
+}
+
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->demandes = new ArrayCollection();
         $this->roles = ['ROLE_DONNEUR']; 
     }
 

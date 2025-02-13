@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+{% block title %}Profil de {{ utilisateur.nom }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center profil-titre mb-4">
+        <i class="fas fa-user-circle"></i>
+        Profil de {{ utilisateur.nom }} {{ utilisateur.prenom }}
+    </h2>
+
+    <!-- Coordonnées utilisateur -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header profil-header">
+            <h4><i class="fas fa-id-card"></i> Coordonnées</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Nom :</strong> {{ utilisateur.nom }}</p>
+            <p><strong>Prénom :</strong> {{ utilisateur.prenom }}</p>
+            <p><strong>Email :</strong> {{ utilisateur.email }}</p>
+            <p><strong>Téléphone :</strong> {{ utilisateur.telephone }}</p>
+            <a href="{{ path('utilisateur_modifier', { id: utilisateur.id }) }}"
+               class="btn profil-btn-primary">
+                <i class="fas fa-edit"></i> Modifier mon profil
+            </a>
+        </div>
+    </div>
+
+    {% if 'ROLE_DONNEUR' in utilisateur.roles %}
+        {# ---------------- Articles disponibles ---------------- #}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header profil-header">
+                <h4><i class="fas fa-box-open"></i> Articles disponibles</h4>
+            </div>
+            <div class="card-body">
+                {% set articlesDisponibles = [] %}
+                {% for art in articlesPublies %}
+                    {% if art.statut == 'disponible' %}
+                        {% set articlesDisponibles = articlesDisponibles|merge([art]) %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if articlesDisponibles is empty %}
+                    <p class="text-muted">Aucun article disponible.</p>
+                {% else %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>État</th>
+                                <th>Ville</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for article in articlesDisponibles %}
+                            <tr>
+                                <td>{{ article.titre }}</td>
+                                <td>{{ article.etat }}</td>
+                                <td>{{ article.ville }}</td>
+                                <td><span class="profil-badge-secondary">{{ article.statut }}</span></td>
+                                <td>
+                                    <a href="{{ path('article_modifier', { id: article.id }) }}"
+                                       class="btn profil-btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Modifier
+                                    </a>
+                                    {# Formulaire POST pour supprimer #}
+                                    <form action="{{ path('article_supprimer', { id: article.id }) }}"
+                                          method="post"
+                                          style="display:inline;"
+                                          onsubmit="return confirm('Voulez-vous vraiment supprimer cet article ?');">
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Supprimer
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+
+        {# ---------------- Articles en attente (EN_COURS) ---------------- #}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header profil-header">
+                <h4><i class="fas fa-clock"></i> Articles en attente de confirmation</h4>
+            </div>
+            <div class="card-body">
+                {% if articlesDemandes is empty %}
+                    <p class="text-muted">Aucun article en attente de confirmation.</p>
+                {% else %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Demandeur</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for demande in articlesDemandes %}
+                            {% if demande.article.utilisateur == utilisateur %}
+                                <tr>
+                                    <td>{{ demande.article.titre }}</td>
+                                    <td>{{ demande.utilisateur.nom }} ({{ demande.utilisateur.email }})</td>
+                                    <td>
+                                        <form method="post"
+                                              action="{{ path('article_confirmer', { id: demande.article.id }) }}"
+                                              style="display:inline;">
+                                            <button type="submit" class="btn btn-success btn-sm">Confirmer</button>
+                                        </form>
+
+                                        <form method="post"
+                                              action="{{ path('article_annuler', { id: demande.article.id }) }}"
+                                              style="display:inline;">
+                                            <button type="submit" class="btn btn-danger btn-sm">Annuler</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+
+        {# ---------------- Articles réservés ---------------- #}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header profil-header">
+                <h4><i class="fas fa-check-circle"></i> Articles réservés</h4>
+            </div>
+            <div class="card-body">
+                {% if articlesReserves is empty %}
+                    <p class="text-muted">Aucun article réservé.</p>
+                {% else %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for article in articlesReserves %}
+                            <tr>
+                                <td>{{ article.titre }}</td>
+                                <td><span class="profil-badge-secondary">{{ article.statut }}</span></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{# Bouton "Retour en haut" si nécessaire #}
+<button id="back-to-top" title="Revenir en haut">
+    <i class="fas fa-arrow-up"></i>
+</button>
+{% endblock %}

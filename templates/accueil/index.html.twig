@@ -115,23 +115,30 @@
     <h3 class="section-title">Articles Réservés</h3>
     <div class="container mt-4 reserved-items-section">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for article in reserved_articles %}
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="{{ asset('build/images/' ~ article.images) }}" class="card-img-top" alt="{{ article.titre }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ article.titre }}</h5>
-                            <p class="card-text">{{ article.description }}</p>
-                            <p class="card-text"><strong>État :</strong> {{ article.etat }}</p>
-                            <p class="card-text"><strong>Date de réservation :</strong> {{ article.dateReservation|date('d M Y') }}</p>
-                            <button class="btn btn-secondary" disabled>Réservé</button>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                <p>Aucun article réservé pour le moment.</p>
-            {% endfor %}
+      {% for article in reserved_articles %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{ asset('uploads/' ~ article.images) }}" class="card-img-top" alt="{{ article.titre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ article.titre }}</h5>
+                <p class="card-text">{{ article.description }}</p>
+                <p class="card-text"><strong>État :</strong> {{ article.etat }}</p>
+
+                <!-- Bouton Réservé désactivé -->
+                <button class="btn btn-secondary" disabled>Réservé</button>
+
+                <!-- Bouton “Commenter” s’affiche uniquement si l’utilisateur est le receveur -->                
+                {% if app.user and 'ROLE_RECEVEUR' in app.user.roles %}
+                    {# Vérifier si c’est vraiment réservé par app.user ou juste un article en 'reserve' #}
+                    {# Si vous n’avez pas la distinction, vous pourriez juste vérifier 'statut == "reserve"' #}
+                    <a href="{{ path('details', { id: article.id }) }}#section_commentaires" 
+                       class="btn btn-primary">Commenter</a>
+                {% endif %}
+            </div>
         </div>
+    </div>
+{% endfor %}
+
     </div>
 
     <!-- Section Contact -->

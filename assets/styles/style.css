@@ -124,25 +124,30 @@ nav .navbar {
 .slogan-container {
     position: relative;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 2rem;  /* Largeur max (optionnel) */
+    margin-left: auto;      
+    margin-right: auto;     
+    overflow: hidden;       /* Pour masquer le débordement éventuel */
 }
 
 .slogan-image {
-    width: 100%;
-    background-attachment: fixed;
-    background-size: cover;
+    display: block;
+    width: 50%; 
+    max-height: 400px;      /* Limite la hauteur à 400 px */
+    object-fit: cover;      /* Recadre l'image sans la déformer */
 }
 
 .slogan-text {
     position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, 0%);
+    top: 50%;               /* Centré verticalement */
+    left: 50%;              /* Centré horizontalement */
+    transform: translate(-50%, -50%);
     color: white;
     font-size: 2.5rem;
     font-weight: bold;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
+
 
 /* Section Nouveaux articles */
 .section-title {
@@ -340,7 +345,73 @@ footer a {
 
 /* ================================================end footer==================================================== */
 
+/* ==============================================profilll====================================================== */
+.profil-titre {
+    color: #27316f; /* par exemple */
+}
 
+/* Header de chaque card (remplace bg-primary, bg-warning, etc.) */
+.profil-header {
+    background-color: #e6b800; /* Couleur de fond */
+    color: #27316f;           /* Couleur du texte */
+    padding: 10px 20px;
+    border-radius: 5px 5px 0 0;
+    /* Vous pouvez ajouter d'autres styles si besoin */
+}
+
+/* Bouton principal personnalisé */
+.profil-btn-primary {
+    background-color: #5ab2af;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+.profil-btn-primary:hover {
+    background-color: #469d99; /* un peu plus sombre */
+}
+
+/* Bouton warning personnalisé */
+.profil-btn-warning {
+    background-color: #ffc800;
+    color: #27316f;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+.profil-btn-warning:hover {
+    background-color: #e6b800;
+}
+
+/* Badge type "statut" */
+.profil-badge-secondary {
+    background-color: #27316f;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+/* Bouton Retour en haut */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #5ab2af;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 24px;
+    line-height: 50px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+#back-to-top:hover {
+    background-color: #ffc800;
+    transform: scale(1.1);
+}
 
 /* ==================================================================================================== */
 

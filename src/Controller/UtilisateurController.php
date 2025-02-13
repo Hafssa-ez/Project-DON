@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Entity\Article;
+use App\Entity\UtilisateurArticle;
+use App\Enum\StatutDemande;
+
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +29,7 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-    // ✅ Créer un utilisateur
+    //  Créer un utilisateur
     #[Route('/create', name: 'utilisateur_create', methods: ['GET', 'POST'])]
     public function create(
         Request $request,
@@ -55,6 +59,14 @@ class UtilisateurController extends AbstractController
             return $this->redirectToRoute('utilisateur_create');
         }
 
+        // Validation du mot de passe
+        $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$/';
+if (!preg_match($pattern, $password)) {
+    $this->addFlash('error', 'Le mot de passe doit contenir au moins 12 caractères 
+                             et inclure des minuscules, majuscules, chiffres et caractères spéciaux.');
+    return $this->redirectToRoute('utilisateur_create');
+}
+
         // Vérification si l'email ou le pseudo existent déjà
         if ($utilisateurRepository->findOneBy(['email' => $email])) {
             $this->addFlash('error', 'Cet email est déjà utilisé.');
@@ -82,42 +94,58 @@ class UtilisateurController extends AbstractController
 
         // Message de succès
         $this->addFlash('success', 'Utilisateur créé avec succès.');
-        return $this->redirectToRoute('utilisateur_liste');
+        return $this->redirectToRoute('accueil');
     }
 
     #[Route('/{id}/modifier', name: 'utilisateur_modifier', methods: ['GET', 'POST'])]
-public function modifier(
-    Request $request,
-    Utilisateur $utilisateur,
-    EntityManagerInterface $entityManager,
-    UserPasswordHasherInterface $passwordHasher
-): Response {
-    // Récupère les données pour afficher le formulaire
-    if ($request->isMethod('GET')) {
-        return $this->render('utilisateur/modifier.html.twig', [
-            'utilisateur' => $utilisateur,
-        ]);
+    public function modifier(
+        Request $request,
+        Utilisateur $utilisateur,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $passwordHasher
+    ): Response {
+        $utilisateurConnecte = $this->getUser();
+    
+        if (!$utilisateurConnecte) {
+            $this->addFlash('danger', 'Vous devez être connecté pour modifier un profil.');
+            return $this->redirectToRoute('app_login');
+        }
+    
+        // Vérifie si l'utilisateur connecté est admin ou s'il modifie son propre profil
+        $estAdmin = in_array('ROLE_ADMIN', $utilisateurConnecte->getRoles(), true);
+        $modificationPropreProfil = ($utilisateurConnecte === $utilisateur);
+    
+        if ($request->isMethod('GET')) {
+            return $this->render('utilisateur/modifier.html.twig', [
+                'utilisateur' => $utilisateur,
+            ]);
+        }
+    
+        $data = $request->request->all();
+    
+        $utilisateur->setNom($data['nom'] ?? $utilisateur->getNom())
+            ->setPrenom($data['prenom'] ?? $utilisateur->getPrenom())
+            ->setPseudo($data['pseudo'] ?? $utilisateur->getPseudo())
+            ->setEmail($data['email'] ?? $utilisateur->getEmail())
+            ->setTelephone($data['telephone'] ?? $utilisateur->getTelephone());
+    
+        if (!empty($data['password'])) {
+            $utilisateur->setPassword($passwordHasher->hashPassword($utilisateur, $data['password']));
+        }
+    
+        $entityManager->flush();
+    
+        $this->addFlash('success', 'Utilisateur modifié avec succès.');
+    
+        if ($modificationPropreProfil) {
+            return $this->redirectToRoute('utilisateur_profil');
+        } elseif ($estAdmin) {
+            return $this->redirectToRoute('utilisateur_liste');
+        }
+    
+        return $this->redirectToRoute('accueil'); // Redirection par défaut si nécessaire
     }
-
-    // Récupère les données du formulaire
-    $data = $request->request->all();
-
-    $utilisateur->setNom($data['nom'] ?? $utilisateur->getNom())
-        ->setPrenom($data['prenom'] ?? $utilisateur->getPrenom())
-        ->setPseudo($data['pseudo'] ?? $utilisateur->getPseudo())
-        ->setEmail($data['email'] ?? $utilisateur->getEmail())
-        ->setTelephone($data['telephone'] ?? $utilisateur->getTelephone());
-
-    if (!empty($data['password'])) {
-        $utilisateur->setPassword($passwordHasher->hashPassword($utilisateur, $data['password']));
-    }
-
-    $entityManager->flush();
-
-    $this->addFlash('success', 'Utilisateur modifié avec succès.');
-    return $this->redirectToRoute('utilisateur_liste');
-}
-
+    
     #[Route('/{id}/delete', name: 'utilisateur_delete', methods: ['POST'])]
     public function delete(Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
     {
@@ -127,4 +155,35 @@ public function modifier(
         $this->addFlash('success', 'Utilisateur supprimé avec succès.');
         return $this->redirectToRoute('utilisateur_liste');
     }
+    #[Route('/profil', name: 'utilisateur_profil')]
+    public function profil(EntityManagerInterface $em): Response
+    {
+        $utilisateur = $this->getUser();
+    
+        if (!$utilisateur) {
+            $this->addFlash('danger', 'Vous devez être connecté pour accéder à votre profil.');
+            return $this->redirectToRoute('app_login');
+        }
+    
+        // 🔹Récupérer les articles publiés par le donneur
+        $articlesPublies = $em->getRepository(Article::class)->findBy(['utilisateur' => $utilisateur]);
+    
+        //  Récupérer les articles réservés
+        $articlesReserves = $em->getRepository(Article::class)->findBy(['statut' => 'reserve']);
+    
+        //  Récupérer les articles en attente de confirmation
+        $articlesDemandes = $em->getRepository(UtilisateurArticle::class)->findBy(['statut' => StatutDemande::EN_COURS]);
+    
+        return $this->render('utilisateur/profil.html.twig', [
+            'utilisateur' => $utilisateur,
+            'articlesPublies' => $articlesPublies,
+            'articlesReserves' => $articlesReserves,
+            'articlesDemandes' => $articlesDemandes,
+         
+        ]);
+    }
+
+    
+    
+
 }
