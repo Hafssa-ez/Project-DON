@@ -30,3 +30,5 @@ article_supprimer:
   path: /articles/{id}/supprimer
   controller: App\Controller\ArticleController::supprimer
   methods: [POST]
+app_logout:
+  path: /logout
