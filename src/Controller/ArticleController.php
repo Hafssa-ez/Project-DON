@@ -191,7 +191,6 @@ public function liste(ArticleRepository $articleRepository): Response
         ]);
     }
     
-
     #[Route('/article/demander/{id}', name: 'article_demander')]
     public function demanderArticle(
         Article $article,
@@ -211,28 +210,18 @@ public function liste(ArticleRepository $articleRepository): Response
             $this->addFlash('danger', 'En tant que donneur, vous ne pouvez pas demander un article.');
             return $this->redirectToRoute('accueil');
         }
-    
-        // 3) Vérifie si l'article est déjà réservé ou en cours
         if ($article->getStatut() !== 'disponible') {
             $this->addFlash('warning', 'Cet article n\'est plus disponible.');
             return $this->redirectToRoute('article_detail', ['id' => $article->getId()]);
         }
-    
-        // 4) Changer le statut de l'article en "en_cours"
         $article->setStatut('en_cours');
         $em->persist($article);
-    
-        // 5) Créer une demande dans la table utilisateur_article
         $demande = new UtilisateurArticle($utilisateur, $article);
-        // Remplacez ici "changerStatut" par "setStatut"
         $demande->setStatut(StatutDemande::EN_COURS);
         $demande->setDateReservation(new \DateTimeImmutable());
         $em->persist($demande);
-    
-        // 6) Enregistrer en base
         $em->flush();
     
-        // 7) Envoyer les emails au donneur et au receveur
         $emailDonneur = (new Email())
             ->from('noreplay.don@gmail.com')
             ->to($article->getUtilisateur()->getEmail())
@@ -257,37 +246,27 @@ public function liste(ArticleRepository $articleRepository): Response
                 $article->getTitre()
             ));
         $mailer->send($emailReceveur);
-    
-        // 8) Message flash et redirection
         $this->addFlash('success', 'Votre demande a été envoyée avec succès. Le donneur vous contactera bientôt.');
         return $this->redirectToRoute('accueil');
     }
     #[Route('/article/confirmer/{id}', name: 'article_confirmer', methods: ['POST'])]
     public function confirmerReservation(int $id, EntityManagerInterface $em): Response
     {
-        // 1) Récupération de l'article
         $article = $em->getRepository(Article::class)->find($id);
         if (!$article) {
             throw $this->createNotFoundException('Article non trouvé.');
         }
-
-        // 2) Vérification : l'utilisateur connecté est-il le donneur ?
         $utilisateur = $this->getUser();
         if ($article->getUtilisateur() !== $utilisateur) {
             $this->addFlash('danger', "Vous n'avez pas l'autorisation de confirmer cette demande.");
             return $this->redirectToRoute('utilisateur_profil');
         }
 
-        // 3) Mettre l'article en "reserve" (champ string dans l'entité Article)
         $article->setStatut('reserve'); 
-
-        // 4) Récupérer la demande (statut = EN_COURS) pour cet article
         $demande = $em->getRepository(UtilisateurArticle::class)->findOneBy([
             'article' => $article,
             'statut'  => StatutDemande::EN_COURS,
         ]);
-
-        // Si on la trouve, on la passe à StatutDemande::RESERVE
         if ($demande) {
             $demande->setStatut(StatutDemande::RESERVE);
         }

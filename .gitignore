@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -35,3 +36,6 @@ yarn-error.log
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+=======
+.codegpt
+>>>>>>> 205a62ffee587f4fcbcb5d9bca20f7bfaae127b3
