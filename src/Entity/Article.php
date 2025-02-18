@@ -24,7 +24,7 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 200)]
     private ?string $etat = null;
 
     #[ORM\Column(length: 255)]
