@@ -20,6 +20,7 @@ class UtilisateurController extends AbstractController
 {
     // ✅ Afficher la liste des utilisateurs
     #[Route('/', name: 'utilisateur_liste', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(UtilisateurRepository $utilisateurRepository): Response
     {
         $utilisateurs = $utilisateurRepository->findAll();

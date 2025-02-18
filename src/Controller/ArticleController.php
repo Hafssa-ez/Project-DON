@@ -212,7 +212,7 @@ public function liste(ArticleRepository $articleRepository): Response
         }
         if ($article->getStatut() !== 'disponible') {
             $this->addFlash('warning', 'Cet article n\'est plus disponible.');
-            return $this->redirectToRoute('article_detail', ['id' => $article->getId()]);
+            return $this->redirectToRoute('accueil', ['id' => $article->getId()]);
         }
         $article->setStatut('en_cours');
         $em->persist($article);
