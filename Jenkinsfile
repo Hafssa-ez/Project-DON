@@ -27,7 +27,7 @@ pipeline{
                     APP_ENV=prod
                     APP_DEBUG=1
                     DATABASE_URL="mysql://root@127.0.0.1:3306/${DEPLOY_DIR}projet_don?serverVersion=9.1.0"
-                    """.stripIndent
+                    """
                     writeFile file: "${DEPLOY_DIR}/.env.local", text: envLocal
 
 
