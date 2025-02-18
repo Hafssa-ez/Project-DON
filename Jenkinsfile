@@ -29,7 +29,8 @@ pipeline {
                     def envLocal = """
                     APP_ENV=prod
                     APP_DEBUG=1
-                    DATABASE_URL="mysql://root@127.0.0.1:3306/projet_don?serverVersion=9.1.0"
+                    DATABASE_URL="mysql://root:@127.0.0.1:3306/projet_don?serverVersion=9.1.0"
+
 
                     """.stripIndent()
 
