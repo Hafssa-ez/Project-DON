@@ -104,13 +104,10 @@ class __TwigTemplate_b9f011fe78854ae7cb09581f464cf215 extends Template
         // line 9
         yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 9, $this->source); })()), 'form_start');
         yield "
-            ";
-        // line 10
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 10, $this->source); })()), "nom", [], "any", false, false, false, 10), 'row');
-        yield "
+          
             ";
         // line 11
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 11, $this->source); })()), "prenom", [], "any", false, false, false, 11), 'row');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 11, $this->source); })()), "pseudo", [], "any", false, false, false, 11), 'row');
         yield "
             ";
         // line 12
@@ -159,7 +156,7 @@ class __TwigTemplate_b9f011fe78854ae7cb09581f464cf215 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  128 => 17,  121 => 13,  117 => 12,  113 => 11,  109 => 10,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  125 => 17,  118 => 13,  114 => 12,  110 => 11,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -173,8 +170,8 @@ class __TwigTemplate_b9f011fe78854ae7cb09581f464cf215 extends Template
         <h2>Modifier mon profil</h2>
 
         {{ form_start(form) }}
-            {{ form_row(form.nom) }}
-            {{ form_row(form.prenom) }}
+          
+            {{ form_row(form.pseudo) }}
             {{ form_row(form.email) }}
             {{ form_row(form.telephone) }}
 

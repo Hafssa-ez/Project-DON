@@ -14,93 +14,112 @@
 
 <body>
     <!-- Navbar -->
-    {% block navbar %}
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <img src="{{ asset('images/logo1.png') }}" alt="logo" width="60" height="60">
+   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        {# Logo + nom du site #}
+        <div class="d-flex align-items-center">
+            <img 
+                src="{{ asset('images/logo1.png') }}" 
+                alt="logo" 
+                width="60" 
+                height="60"
+                class="me-2"
+            >
             <a class="navbar-brand" href="{{ path('accueil') }}">DON</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        </div>
+
+        {# Barre de recherche en dehors du collapse, 
+           pour qu’elle reste toujours visible #}
+        <form 
+            class="d-flex align-items-center ms-3 me-auto gap-2" 
+            role="search" 
+            method="GET" 
+            action="{{ path('accueil') }}"
+        >
+            <input
+                class="form-control large-search-bar" 
+                type="search" 
+                name="q" 
+                placeholder="Rechercher un article..."
+                value="{{ app.request.query.get('q') }}"
+                aria-label="Search"
+            >
+            <button class="btn btn-custom" type="submit">
+                Rechercher
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        </form>
+
+        {# Bouton burger #}
+        <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" 
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        {# Contenu qui se replie dans le menu burger (boutons, etc.) #}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
+            {# On empile en colonne en mobile, et en ligne (row) en desktop #}
+            <div class="d-flex flex-column flex-lg-row align-items-start ms-auto btn-group-custom">
                 
-                <!-- Barre de recherche -->
-                <form class="d-flex align-items-center w-90 gap-2" role="search" method="GET" action="{{ path('accueil') }}">
-                    <input 
-                        class="form-control large-search-bar me-2" 
-                        type="search" 
-                        name="q" 
-                        placeholder="Rechercher un article..." 
-                        value="{{ app.request.query.get('q') }}" 
-                        aria-label="Search"
-                    >
-                    <button class="btn btn-custom" type="submit">Rechercher</button>
-                </form>
+                {# Bouton "Ajouter un article" #}
+                <a href="{{ path('ajouter_article') }}" class="btn btn-custom my-1">
+                    <i class="bi bi-plus-circle"></i> Ajouter un article
+                </a>
 
-                <div class="d-flex btn-group-custom ms-auto">
-                    <!-- Bouton Ajouter un article -->
-                    <a href="{{ path('ajouter_article') }}">
-                        <button class="btn btn-custom" type="button">
-                            <i class="bi bi-plus-circle"></i> Ajouter un article
+                {# Si l'utilisateur est connecté, on affiche son dropdown #}
+                {% if app.user %}
+                    <div class="dropdown my-1">
+                        <button 
+                            class="btn btn-custom dropdown-toggle" 
+                            type="button" 
+                            id="userDropdown" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false"
+                        >
+                            <i class="bi bi-person-circle"></i> {{ app.user.pseudo }}
                         </button>
-                    </a>
-
-                    <!-- Boutons de connexion / Profil -->
-                    <div class="d-flex btn-account-group">
-                        {% if app.user %}
-                            <!-- Dropdown contenant le nom de l'utilisateur -->
-                            <div class="dropdown">
-                               <button class="btn btn-custom dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                         <i class="bi bi-person-circle"></i> {{ app.user.nom }}
-                               </button>
-
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <!-- Section Nom de l'utilisateur -->
-                                    <li class="dropdown-header text-center fw-bold">{{ app.user.nom }}</li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    
-                                    <!-- Lien vers le profil -->
-                                    <li>
-                                        <a class="dropdown-item " href="{{ path('utilisateur_profil') }}">
-                                            <i class="bi bi-person"></i> Mon Profil
-                                        </a>
-                                    </li>
-
-                                    <li><hr class="dropdown-divider"></li>
-
-                                    <!-- Bouton de déconnexion -->
-                                    <li>
-                                        <a class="dropdown-item text-danger" href="{{ path('app_logout') }}">
-                                            <i class="bi bi-box-arrow-left"></i> Se Déconnecter
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        {% else %}
-                            <!-- Bouton S'inscrire -->
-                            <a href="{{ path('utilisateur_create') }}">
-                                <button class="btn btn-custom" type="button">
-                                    <i class="bi bi-person-plus"></i> S'inscrire
-                                </button>
-                            </a>
-                            
-                            <!-- Bouton Se connecter -->
-                            <a href="{{ path('app_login') }}">
-                                <button class="btn btn-custom" type="button">
-                                    <i class="bi bi-box-arrow-in-right"></i> Se connecter
-                                </button>
-                            </a>
-                        {% endif %}
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li class="dropdown-header text-center fw-bold">
+                                {{ app.user.pseudo }}
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('utilisateur_profil') }}">
+                                    <i class="bi bi-person"></i> Mon Profil
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="{{ path('app_logout') }}">
+                                    <i class="bi bi-box-arrow-left"></i> Se Déconnecter
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
+                {% else %}
+                    {# Sinon, boutons S'inscrire / Se connecter #}
+                    <a href="{{ path('utilisateur_create') }}" class="btn btn-custom my-1">
+                        <i class="bi bi-person-plus"></i> S'inscrire
+                    </a>
+                    <a href="{{ path('app_login') }}" class="btn btn-custom my-1">
+                        <i class="bi bi-box-arrow-in-right"></i> Se connecter
+                    </a>
+                {% endif %}
             </div>
         </div>
+    </div>
     </nav>
-    {% endblock %}
 
-    {% block body %}{% endblock %}
+
+    {% block body %}
+    {% endblock %}
 
     <!-- Content -->
     <div class="container">
@@ -122,9 +141,10 @@
     <footer>
         <div>&copy; 2024 Project DON. Tous droits réservés.</div>
         <div>
-            <a href="#" class="footer-a"><i class="bi bi-info-circle"></i> À propos</a> |
-            <a href="#" class="footer-a"><i class="bi bi-lock"></i> Confidentialité</a> |
-            <a href="#" class="footer-a"><i class="bi bi-file-earmark-text"></i> Conditions d'utilisation</a>
+           <a href="{{ path('mentions_legales') }}" class="footer-a"><i class="bi bi-info-circle"></i> Mentions Légales</a> |
+           <a href="{{ path('politique_confidentialite') }}" class="footer-a"><i class="bi bi-shield-lock"></i> Politique de Confidentialité</a> |
+           <a href="{{ path('conditions_utilisation') }}" class="footer-a"><i class="bi bi-file-earmark-text"></i> CGU</a> |
+
         </div>
     </footer>
     {% endblock %}

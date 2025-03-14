@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/utilisateurs')]
 class UtilisateurController extends AbstractController
 {
-    // ✅ Afficher la liste des utilisateurs
+    //  Afficher la liste des utilisateurs
     #[Route('/', name: 'utilisateur_liste', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function index(UtilisateurRepository $utilisateurRepository): Response
@@ -46,8 +46,7 @@ class UtilisateurController extends AbstractController
         // Si la requête est une requête POST, traiter les données du formulaire
         $data = $request->request->all();
 
-        $nom = $data['nom'] ?? null;
-        $prenom = $data['prenom'] ?? null;
+       
         $pseudo = $data['pseudo'] ?? null;
         $email = $data['email'] ?? null;
         $telephone = $data['telephone'] ?? null;
@@ -55,18 +54,18 @@ class UtilisateurController extends AbstractController
         $roleChoisi = $data['role'] ?? 'ROLE_DONNEUR';
 
         // Validation des champs obligatoires
-        if (!$nom || !$prenom || !$email || !$pseudo || !$password || !$telephone) {
+        if (!$email || !$pseudo || !$password || !$telephone) {
             $this->addFlash('error', 'Tous les champs sont obligatoires.');
             return $this->redirectToRoute('utilisateur_create');
         }
 
         // Validation du mot de passe
         $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$/';
-if (!preg_match($pattern, $password)) {
-    $this->addFlash('error', 'Le mot de passe doit contenir au moins 12 caractères 
+        if (!preg_match($pattern, $password)) {
+              $this->addFlash('error', 'Le mot de passe doit contenir au moins 12 caractères 
                              et inclure des minuscules, majuscules, chiffres et caractères spéciaux.');
-    return $this->redirectToRoute('utilisateur_create');
-}
+          return $this->redirectToRoute('utilisateur_create');
+        }
 
         // Vérification si l'email ou le pseudo existent déjà
         if ($utilisateurRepository->findOneBy(['email' => $email])) {
@@ -79,11 +78,8 @@ if (!preg_match($pattern, $password)) {
             return $this->redirectToRoute('utilisateur_create');
         }
 
-        // Création de l'utilisateur
         $utilisateur = new Utilisateur();
-        $utilisateur->setNom($nom)
-            ->setPrenom($prenom)
-            ->setPseudo($pseudo)
+        $utilisateur ->setPseudo($pseudo)
             ->setEmail($email)
             ->setTelephone($telephone)
             ->setPassword($passwordHasher->hashPassword($utilisateur, $password))
@@ -95,7 +91,7 @@ if (!preg_match($pattern, $password)) {
 
         // Message de succès
         $this->addFlash('success', 'Utilisateur créé avec succès.');
-        return $this->redirectToRoute('accueil');
+        return $this->redirectToRoute('app_login');
     }
 
     #[Route('/{id}/modifier', name: 'utilisateur_modifier', methods: ['GET', 'POST'])]
@@ -124,9 +120,7 @@ if (!preg_match($pattern, $password)) {
     
         $data = $request->request->all();
     
-        $utilisateur->setNom($data['nom'] ?? $utilisateur->getNom())
-            ->setPrenom($data['prenom'] ?? $utilisateur->getPrenom())
-            ->setPseudo($data['pseudo'] ?? $utilisateur->getPseudo())
+        $utilisateur->setPseudo($data['pseudo'] ?? $utilisateur->getPseudo())
             ->setEmail($data['email'] ?? $utilisateur->getEmail())
             ->setTelephone($data['telephone'] ?? $utilisateur->getTelephone());
     

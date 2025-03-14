@@ -45,9 +45,9 @@ class __TwigTemplate_3f8797b0661589736c08bc3b94c7304a extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "reset_password/email.html.twig"));
 
         // line 1
-        yield "<h1>Hi!</h1>
+        yield "<h1>Bonjour!</h1>
 
-<p>To reset your password, please visit the following link</p>
+<p>Pour réinitialiser votre mot de passe, veuillez visiter le lien suivant</p>
 
 <a href=\"";
         // line 5
@@ -56,12 +56,13 @@ class __TwigTemplate_3f8797b0661589736c08bc3b94c7304a extends Template
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("app_reset_password", ["token" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetToken"]) || array_key_exists("resetToken", $context) ? $context["resetToken"] : (function () { throw new RuntimeError('Variable "resetToken" does not exist.', 5, $this->source); })()), "token", [], "any", false, false, false, 5)]), "html", null, true);
         yield "</a>
 
-<p>This link will expire in ";
+<p>Ce lien va expirer ";
         // line 7
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetToken"]) || array_key_exists("resetToken", $context) ? $context["resetToken"] : (function () { throw new RuntimeError('Variable "resetToken" does not exist.', 7, $this->source); })()), "expirationMessageKey", [], "any", false, false, false, 7), CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetToken"]) || array_key_exists("resetToken", $context) ? $context["resetToken"] : (function () { throw new RuntimeError('Variable "resetToken" does not exist.', 7, $this->source); })()), "expirationMessageData", [], "any", false, false, false, 7), "ResetPasswordBundle"), "html", null, true);
         yield ".</p>
 
-<p>Cheers!</p>
+<p>Cordialement !</p>
+
 ";
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -98,15 +99,16 @@ class __TwigTemplate_3f8797b0661589736c08bc3b94c7304a extends Template
 
     public function getSourceContext(): Source
     {
-        return new Source("<h1>Hi!</h1>
+        return new Source("<h1>Bonjour!</h1>
 
-<p>To reset your password, please visit the following link</p>
+<p>Pour réinitialiser votre mot de passe, veuillez visiter le lien suivant</p>
 
 <a href=\"{{ url('app_reset_password', {token: resetToken.token}) }}\">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
-<p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+<p>Ce lien va expirer {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
 
-<p>Cheers!</p>
+<p>Cordialement !</p>
+
 ", "reset_password/email.html.twig", "C:\\Users\\ezzou\\projet_Don\\templates\\reset_password\\email.html.twig");
     }
 }

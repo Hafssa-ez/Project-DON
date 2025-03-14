@@ -139,38 +139,24 @@ class __TwigTemplate_b7b572d23ea8ecf376db2a0000ae1f03 extends Template
         yield "\" method=\"post\">
         <div class=\"user-details\">
             <div class=\"input-box\">
-                <span class=\"details\">Nom</span>
-                <input type=\"text\" name=\"nom\" value=\"";
-        // line 23
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 23, $this->source); })()), "nom", [], "any", false, false, false, 23), "html", null, true);
-        yield "\" required>
-            </div>
-            <div class=\"input-box\">
-                <span class=\"details\">Prénom</span>
-                <input type=\"text\" name=\"prenom\" value=\"";
-        // line 27
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 27, $this->source); })()), "prenom", [], "any", false, false, false, 27), "html", null, true);
-        yield "\" required>
-            </div>
-            <div class=\"input-box\">
                 <span class=\"details\">Email</span>
                 <input type=\"email\" name=\"email\" value=\"";
-        // line 31
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 31, $this->source); })()), "email", [], "any", false, false, false, 31), "html", null, true);
+        // line 23
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 23, $this->source); })()), "email", [], "any", false, false, false, 23), "html", null, true);
         yield "\" required>
             </div>
             <div class=\"input-box\">
                 <span class=\"details\">Pseudo</span>
                 <input type=\"text\" name=\"pseudo\" value=\"";
-        // line 35
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 35, $this->source); })()), "pseudo", [], "any", false, false, false, 35), "html", null, true);
+        // line 27
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 27, $this->source); })()), "pseudo", [], "any", false, false, false, 27), "html", null, true);
         yield "\" required>
             </div>
             <div class=\"input-box\">
                 <span class=\"details\">Téléphone</span>
                 <input type=\"tel\" name=\"telephone\" value=\"";
-        // line 39
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 39, $this->source); })()), "telephone", [], "any", false, false, false, 39), "html", null, true);
+        // line 31
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 31, $this->source); })()), "telephone", [], "any", false, false, false, 31), "html", null, true);
         yield "\" required>
             </div>
            
@@ -211,7 +197,7 @@ class __TwigTemplate_b7b572d23ea8ecf376db2a0000ae1f03 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  173 => 39,  166 => 35,  159 => 31,  152 => 27,  145 => 23,  138 => 19,  135 => 18,  126 => 16,  121 => 15,  112 => 13,  107 => 12,  102 => 8,  89 => 7,  77 => 4,  64 => 3,  41 => 1,);
+        return array (  159 => 31,  152 => 27,  145 => 23,  138 => 19,  135 => 18,  126 => 16,  121 => 15,  112 => 13,  107 => 12,  102 => 8,  89 => 7,  77 => 4,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -236,14 +222,6 @@ class __TwigTemplate_b7b572d23ea8ecf376db2a0000ae1f03 extends Template
 
     <form action=\"{{ path('utilisateur_modifier', { id: utilisateur.id }) }}\" method=\"post\">
         <div class=\"user-details\">
-            <div class=\"input-box\">
-                <span class=\"details\">Nom</span>
-                <input type=\"text\" name=\"nom\" value=\"{{ utilisateur.nom }}\" required>
-            </div>
-            <div class=\"input-box\">
-                <span class=\"details\">Prénom</span>
-                <input type=\"text\" name=\"prenom\" value=\"{{ utilisateur.prenom }}\" required>
-            </div>
             <div class=\"input-box\">
                 <span class=\"details\">Email</span>
                 <input type=\"email\" name=\"email\" value=\"{{ utilisateur.email }}\" required>

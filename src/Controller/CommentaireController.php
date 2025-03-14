@@ -162,7 +162,7 @@ class CommentaireController extends AbstractController
                 'date' => $comm->getDate()->format('Y-m-d H:i:s'),
                 'utilisateur' => [
                     'id' => $comm->getUtilisateur()->getId(),
-                    'nom' => $comm->getUtilisateur()->getNom(),
+                    'pseudo' => $comm->getUtilisateur()->getPseudo(),
                 ],
             ];
         }

@@ -20,8 +20,7 @@
 
                 <!-- Coordonnées du donneur -->
                 <h3>Coordonnées du Donneur :</h3>
-                <p><strong>Nom :</strong> {{ article.utilisateur.nom }}</p>
-                <p><strong>Téléphone :</strong> {{ article.utilisateur.telephone }}</p>
+                <p><strong>Nom :</strong> {{ article.utilisateur.pseudo }}</p>
                 <p><strong>Email :</strong> {{ article.utilisateur.email }}</p>
 
                 <!-- Bouton réserver -->
@@ -58,7 +57,7 @@
     <ul>
     {% for comm in article.commentaires %}
         <li>
-            <strong>{{ comm.utilisateur.nom }} :</strong>
+            <strong>{{ comm.utilisateur.pseudo }} :</strong>
             {{ comm.message }}
             <small>(le {{ comm.date|date('d/m/Y H:i') }})</small>
 

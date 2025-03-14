@@ -26,15 +26,21 @@ return [
             [['_route' => 'default', '_controller' => 'App\\Controller\\ArticleController::accueil'], null, ['GET' => 0], null, false, false, null],
         ],
         '/test-email' => [[['_route' => 'test_email', '_controller' => 'App\\Controller\\EmailTestController::sendTestEmail'], null, null, null, false, false, null]],
+        '/home' => [
+            [['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null],
+            [['_route' => 'home'], null, null, null, false, false, null],
+        ],
         '/reset-password' => [[['_route' => 'app_forgot_password_request', '_controller' => 'App\\Controller\\ResetPasswordController::request'], null, null, null, false, false, null]],
         '/reset-password/check-email' => [[['_route' => 'app_check_email', '_controller' => 'App\\Controller\\ResetPasswordController::checkEmail'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/utilisateurs' => [[['_route' => 'utilisateur_liste', '_controller' => 'App\\Controller\\UtilisateurController::index'], null, ['GET' => 0], null, true, false, null]],
         '/utilisateurs/create' => [[['_route' => 'utilisateur_create', '_controller' => 'App\\Controller\\UtilisateurController::create'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/utilisateurs/profil' => [[['_route' => 'utilisateur_profil', '_controller' => 'App\\Controller\\UtilisateurController::profil'], null, null, null, false, false, null]],
-        '/home' => [[['_route' => 'home'], null, null, null, false, false, null]],
         '/articles' => [[['_route' => 'article_liste', '_controller' => 'App\\Controller\\ArticleController::liste'], null, ['GET' => 0], null, false, false, null]],
         '/articles/ajouter' => [[['_route' => 'ajouter_article', '_controller' => 'App\\Controller\\ArticleController::ajouter'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/mentions-legales' => [[['_route' => 'mentions_legales', 'template' => 'mentionlegals.html.twig', '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController'], null, null, null, false, false, null]],
+        '/politique-de-confidentialite' => [[['_route' => 'politique_confidentialite', 'template' => 'politique_confidentialite.html.twig', '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController'], null, null, null, false, false, null]],
+        '/conditions-generales-utilisation' => [[['_route' => 'conditions_utilisation', 'template' => 'conditions_utilisation.html.twig', '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

@@ -73,7 +73,7 @@ class __TwigTemplate_cd1b54bf36a01769f48a50e55c5bfb93 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Password Reset Email Sent";
+        yield "E-mail de réinitialisation du mot de passe envoyé";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -83,7 +83,7 @@ class __TwigTemplate_cd1b54bf36a01769f48a50e55c5bfb93 extends Template
         yield from [];
     }
 
-    // line 5
+    // line 6
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -96,17 +96,17 @@ class __TwigTemplate_cd1b54bf36a01769f48a50e55c5bfb93 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 6
+        // line 7
         yield "    <p>
     Si un compte correspondant à votre adresse e-mail existe, un e-mail vient de vous être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
     Ce lien expirera dans ";
-        // line 8
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetToken"]) || array_key_exists("resetToken", $context) ? $context["resetToken"] : (function () { throw new RuntimeError('Variable "resetToken" does not exist.', 8, $this->source); })()), "expirationMessageKey", [], "any", false, false, false, 8), CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetToken"]) || array_key_exists("resetToken", $context) ? $context["resetToken"] : (function () { throw new RuntimeError('Variable "resetToken" does not exist.', 8, $this->source); })()), "expirationMessageData", [], "any", false, false, false, 8), "ResetPasswordBundle"), "html", null, true);
+        // line 9
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetToken"]) || array_key_exists("resetToken", $context) ? $context["resetToken"] : (function () { throw new RuntimeError('Variable "resetToken" does not exist.', 9, $this->source); })()), "expirationMessageKey", [], "any", false, false, false, 9), CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetToken"]) || array_key_exists("resetToken", $context) ? $context["resetToken"] : (function () { throw new RuntimeError('Variable "resetToken" does not exist.', 9, $this->source); })()), "expirationMessageData", [], "any", false, false, false, 9), "ResetPasswordBundle"), "html", null, true);
         yield ".
 </p>
 <p>
     Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier de spam ou <a href=\"";
-        // line 11
+        // line 12
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_forgot_password_request");
         yield "\">réessayer</a>.
 </p>
@@ -142,14 +142,15 @@ class __TwigTemplate_cd1b54bf36a01769f48a50e55c5bfb93 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  110 => 11,  104 => 8,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  110 => 12,  104 => 9,  100 => 7,  87 => 6,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}E-mail de réinitialisation du mot de passe envoyé{% endblock %}
+
 
 {% block body %}
     <p>

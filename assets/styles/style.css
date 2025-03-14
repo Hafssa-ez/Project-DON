@@ -839,4 +839,12 @@ padding-bottom: 80px;
         font-size: 1rem;
         padding: 8px 15px;
     }
+    /* Forcer le passage en colonne sous 992px */
+@media (max-width: 991px) {
+    .btn-group-custom {
+      flex-direction: column !important;
+      gap: 1rem !important; /* un petit écart entre les boutons en vertical */
+    }
+  }
+  
 }

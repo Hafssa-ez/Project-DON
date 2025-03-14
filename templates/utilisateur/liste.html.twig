@@ -32,12 +32,11 @@
         <tbody>
             {% for utilisateur in utilisateurs %}
                 <tr>
-                    <td>{{ utilisateur.nom }}</td>
-                    <td>{{ utilisateur.prenom }}</td>
+                
                     <td>{{ utilisateur.pseudo }}</td>
                     <td>{{ utilisateur.email }}</td>
                     <td>{{ utilisateur.telephone }}</td>
-                    <td>{{ utilisateur.roles|join(', ') }}</td> {# ✅ Affichage des rôles sous forme de liste séparée par des virgules #}
+                    <td>{{ utilisateur.roles|join(', ') }}</td> 
                     <td>
                         <a href="{{ path('utilisateur_modifier', { id: utilisateur.id }) }}" class="btn btn-primary">Modifier</a>
                         <form action="{{ path('utilisateur_delete', { id: utilisateur.id }) }}" method="post" style="display:inline;">

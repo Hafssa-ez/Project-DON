@@ -155,45 +155,37 @@ class __TwigTemplate_8866cc108edab5c7782aa3dab85335e2 extends Template
         foreach ($context['_seq'] as $context["_key"] => $context["utilisateur"]) {
             // line 34
             yield "                <tr>
-                    <td>";
-            // line 35
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "nom", [], "any", false, false, false, 35), "html", null, true);
-            yield "</td>
+                
                     <td>";
             // line 36
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "prenom", [], "any", false, false, false, 36), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "pseudo", [], "any", false, false, false, 36), "html", null, true);
             yield "</td>
                     <td>";
             // line 37
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "pseudo", [], "any", false, false, false, 37), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "email", [], "any", false, false, false, 37), "html", null, true);
             yield "</td>
                     <td>";
             // line 38
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "email", [], "any", false, false, false, 38), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "telephone", [], "any", false, false, false, 38), "html", null, true);
             yield "</td>
                     <td>";
             // line 39
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "telephone", [], "any", false, false, false, 39), "html", null, true);
-            yield "</td>
-                    <td>";
-            // line 40
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::join(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "roles", [], "any", false, false, false, 40), ", "), "html", null, true);
-            yield "</td> ";
-            // line 41
-            yield "                    <td>
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::join(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "roles", [], "any", false, false, false, 39), ", "), "html", null, true);
+            yield "</td> 
+                    <td>
                         <a href=\"";
-            // line 42
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("utilisateur_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "id", [], "any", false, false, false, 42)]), "html", null, true);
+            // line 41
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("utilisateur_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "id", [], "any", false, false, false, 41)]), "html", null, true);
             yield "\" class=\"btn btn-primary\">Modifier</a>
                         <form action=\"";
-            // line 43
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("utilisateur_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "id", [], "any", false, false, false, 43)]), "html", null, true);
+            // line 42
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("utilisateur_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "id", [], "any", false, false, false, 42)]), "html", null, true);
             yield "\" method=\"post\" style=\"display:inline;\">
                             <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 44
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "id", [], "any", false, false, false, 44))), "html", null, true);
+            // line 43
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "id", [], "any", false, false, false, 43))), "html", null, true);
             yield "\"> ";
-            // line 45
+            // line 44
             yield "                            <button type=\"submit\" class=\"btn btn-danger\">Supprimer</button>
                         </form>
                     </td>
@@ -202,7 +194,7 @@ class __TwigTemplate_8866cc108edab5c7782aa3dab85335e2 extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 50
+            // line 49
             yield "                <tr>
                     <td colspan=\"7\" class=\"text-center\">Aucun utilisateur enregistré.</td>
                 </tr>
@@ -211,7 +203,7 @@ class __TwigTemplate_8866cc108edab5c7782aa3dab85335e2 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['utilisateur'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 54
+        // line 53
         yield "        </tbody>
     </table>
 </div>
@@ -248,7 +240,7 @@ class __TwigTemplate_8866cc108edab5c7782aa3dab85335e2 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  215 => 54,  206 => 50,  197 => 45,  194 => 44,  190 => 43,  186 => 42,  183 => 41,  180 => 40,  176 => 39,  172 => 38,  168 => 37,  164 => 36,  160 => 35,  157 => 34,  152 => 33,  136 => 19,  127 => 17,  122 => 16,  113 => 14,  108 => 13,  102 => 8,  89 => 7,  77 => 4,  64 => 3,  41 => 1,);
+        return array (  207 => 53,  198 => 49,  189 => 44,  186 => 43,  182 => 42,  178 => 41,  173 => 39,  169 => 38,  165 => 37,  161 => 36,  157 => 34,  152 => 33,  136 => 19,  127 => 17,  122 => 16,  113 => 14,  108 => 13,  102 => 8,  89 => 7,  77 => 4,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -287,12 +279,11 @@ class __TwigTemplate_8866cc108edab5c7782aa3dab85335e2 extends Template
         <tbody>
             {% for utilisateur in utilisateurs %}
                 <tr>
-                    <td>{{ utilisateur.nom }}</td>
-                    <td>{{ utilisateur.prenom }}</td>
+                
                     <td>{{ utilisateur.pseudo }}</td>
                     <td>{{ utilisateur.email }}</td>
                     <td>{{ utilisateur.telephone }}</td>
-                    <td>{{ utilisateur.roles|join(', ') }}</td> {# ✅ Affichage des rôles sous forme de liste séparée par des virgules #}
+                    <td>{{ utilisateur.roles|join(', ') }}</td> 
                     <td>
                         <a href=\"{{ path('utilisateur_modifier', { id: utilisateur.id }) }}\" class=\"btn btn-primary\">Modifier</a>
                         <form action=\"{{ path('utilisateur_delete', { id: utilisateur.id }) }}\" method=\"post\" style=\"display:inline;\">

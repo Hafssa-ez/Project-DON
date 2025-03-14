@@ -28,8 +28,7 @@ class UtilisateurControllerTest extends WebTestCase
 
       
         $this->assertSelectorExists('#form-inscription', " Le formulaire d'inscription est introuvable.");
-        $this->assertSelectorExists('input[name="nom"]', "Champ 'nom' introuvable");
-        $this->assertSelectorExists('input[name="prenom"]', "Champ 'prenom' introuvable");
+
         $this->assertSelectorExists('input[name="email"]', "Champ 'email' introuvable");
         $this->assertSelectorExists('input[name="pseudo"]', "Champ 'pseudo' introuvable");
         $this->assertSelectorExists('input[name="telephone"]', " Champ 'telephone' introuvable");
@@ -50,8 +49,7 @@ class UtilisateurControllerTest extends WebTestCase
         $uniquePseudo = 'testuser' . uniqid();
        
         $form = $crawler->filter('#form-inscription')->form();
-        $form['nom'] = 'Test';
-        $form['prenom'] = 'User';
+     
         $form['pseudo'] = $uniquePseudo;
         $form['email'] = $uniqueEmail;
         $form['telephone'] = '0612345678';

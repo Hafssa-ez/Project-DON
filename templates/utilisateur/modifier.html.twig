@@ -19,14 +19,6 @@
     <form action="{{ path('utilisateur_modifier', { id: utilisateur.id }) }}" method="post">
         <div class="user-details">
             <div class="input-box">
-                <span class="details">Nom</span>
-                <input type="text" name="nom" value="{{ utilisateur.nom }}" required>
-            </div>
-            <div class="input-box">
-                <span class="details">Prénom</span>
-                <input type="text" name="prenom" value="{{ utilisateur.prenom }}" required>
-            </div>
-            <div class="input-box">
                 <span class="details">Email</span>
                 <input type="email" name="email" value="{{ utilisateur.email }}" required>
             </div>

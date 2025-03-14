@@ -228,9 +228,9 @@ public function liste(ArticleRepository $articleRepository): Response
             ->subject('Demande pour votre article')
             ->text(sprintf(
                 "Bonjour %s,\n\nUn utilisateur souhaite demander votre article '%s'.\n\nCoordonnées du demandeur :\nNom : %s\nEmail : %s\nTéléphone : %s",
-                $article->getUtilisateur()->getNom(),
+                $article->getUtilisateur()->getPseudo(),
                 $article->getTitre(),
-                $utilisateur->getNom(),
+                $utilisateur->getPseudo(),
                 $utilisateur->getEmail(),
                 $utilisateur->getTelephone()
             ));
@@ -242,7 +242,7 @@ public function liste(ArticleRepository $articleRepository): Response
             ->subject('Votre demande a été enregistrée')
             ->text(sprintf(
                 "Bonjour %s,\n\nVotre demande pour l'article '%s' a été bien enregistrée. Le donneur vous contactera prochainement.\n\nCordialement,\nL'équipe de MonSite",
-                $utilisateur->getNom(),
+                $utilisateur->getPseudo(),
                 $article->getTitre()
             ));
         $mailer->send($emailReceveur);

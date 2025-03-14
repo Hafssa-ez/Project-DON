@@ -74,7 +74,7 @@ class __TwigTemplate_d97a20a8c9834a6e9e862d1888833c30 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
         yield "Profil de ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 2, $this->source); })()), "nom", [], "any", false, false, false, 2), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 2, $this->source); })()), "pseudo", [], "any", false, false, false, 2), "html", null, true);
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -103,10 +103,8 @@ class __TwigTemplate_d97a20a8c9834a6e9e862d1888833c30 extends Template
         <i class=\"fas fa-user-circle\"></i>
         Profil de ";
         // line 8
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 8, $this->source); })()), "nom", [], "any", false, false, false, 8), "html", null, true);
-        yield " ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 8, $this->source); })()), "prenom", [], "any", false, false, false, 8), "html", null, true);
-        yield "
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 8, $this->source); })()), "pseudo", [], "any", false, false, false, 8), "html", null, true);
+        yield " 
     </h2>
 
     <!-- Coordonnées utilisateur -->
@@ -115,13 +113,10 @@ class __TwigTemplate_d97a20a8c9834a6e9e862d1888833c30 extends Template
             <h4><i class=\"fas fa-id-card\"></i> Coordonnées</h4>
         </div>
         <div class=\"card-body\">
-            <p><strong>Nom :</strong> ";
-        // line 17
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 17, $this->source); })()), "nom", [], "any", false, false, false, 17), "html", null, true);
-        yield "</p>
-            <p><strong>Prénom :</strong> ";
+       
+            <p><strong>Pseudo :</strong> ";
         // line 18
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 18, $this->source); })()), "prenom", [], "any", false, false, false, 18), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["utilisateur"]) || array_key_exists("utilisateur", $context) ? $context["utilisateur"] : (function () { throw new RuntimeError('Variable "utilisateur" does not exist.', 18, $this->source); })()), "pseudo", [], "any", false, false, false, 18), "html", null, true);
         yield "</p>
             <p><strong>Email :</strong> ";
         // line 19
@@ -295,7 +290,7 @@ class __TwigTemplate_d97a20a8c9834a6e9e862d1888833c30 extends Template
                         yield "</td>
                                     <td>";
                         // line 107
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["demande"], "utilisateur", [], "any", false, false, false, 107), "nom", [], "any", false, false, false, 107), "html", null, true);
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["demande"], "utilisateur", [], "any", false, false, false, 107), "pseudo", [], "any", false, false, false, 107), "html", null, true);
                         yield " (";
                         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["demande"], "utilisateur", [], "any", false, false, false, 107), "email", [], "any", false, false, false, 107), "html", null, true);
                         yield ")</td>
@@ -429,19 +424,19 @@ class __TwigTemplate_d97a20a8c9834a6e9e862d1888833c30 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  398 => 162,  394 => 159,  389 => 156,  384 => 153,  375 => 150,  371 => 149,  368 => 148,  364 => 147,  354 => 139,  350 => 137,  348 => 136,  341 => 131,  336 => 127,  331 => 124,  325 => 123,  315 => 116,  306 => 110,  298 => 107,  294 => 106,  291 => 105,  288 => 104,  284 => 103,  273 => 94,  269 => 92,  267 => 91,  260 => 86,  255 => 82,  250 => 79,  232 => 68,  225 => 63,  220 => 61,  216 => 60,  212 => 59,  208 => 58,  205 => 57,  201 => 56,  188 => 45,  184 => 43,  182 => 42,  179 => 41,  173 => 40,  170 => 39,  167 => 38,  164 => 37,  159 => 36,  157 => 35,  150 => 30,  148 => 29,  146 => 28,  136 => 21,  132 => 20,  128 => 19,  124 => 18,  120 => 17,  106 => 8,  101 => 5,  88 => 4,  64 => 2,  41 => 1,);
+        return array (  393 => 162,  389 => 159,  384 => 156,  379 => 153,  370 => 150,  366 => 149,  363 => 148,  359 => 147,  349 => 139,  345 => 137,  343 => 136,  336 => 131,  331 => 127,  326 => 124,  320 => 123,  310 => 116,  301 => 110,  293 => 107,  289 => 106,  286 => 105,  283 => 104,  279 => 103,  268 => 94,  264 => 92,  262 => 91,  255 => 86,  250 => 82,  245 => 79,  227 => 68,  220 => 63,  215 => 61,  211 => 60,  207 => 59,  203 => 58,  200 => 57,  196 => 56,  183 => 45,  179 => 43,  177 => 42,  174 => 41,  168 => 40,  165 => 39,  162 => 38,  159 => 37,  154 => 36,  152 => 35,  145 => 30,  143 => 29,  141 => 28,  131 => 21,  127 => 20,  123 => 19,  119 => 18,  106 => 8,  101 => 5,  88 => 4,  64 => 2,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
-{% block title %}Profil de {{ utilisateur.nom }}{% endblock %}
+{% block title %}Profil de {{ utilisateur.pseudo }}{% endblock %}
 
 {% block content %}
 <div class=\"container mt-5\">
     <h2 class=\"text-center profil-titre mb-4\">
         <i class=\"fas fa-user-circle\"></i>
-        Profil de {{ utilisateur.nom }} {{ utilisateur.prenom }}
+        Profil de {{ utilisateur.pseudo }} 
     </h2>
 
     <!-- Coordonnées utilisateur -->
@@ -450,8 +445,8 @@ class __TwigTemplate_d97a20a8c9834a6e9e862d1888833c30 extends Template
             <h4><i class=\"fas fa-id-card\"></i> Coordonnées</h4>
         </div>
         <div class=\"card-body\">
-            <p><strong>Nom :</strong> {{ utilisateur.nom }}</p>
-            <p><strong>Prénom :</strong> {{ utilisateur.prenom }}</p>
+       
+            <p><strong>Pseudo :</strong> {{ utilisateur.pseudo}}</p>
             <p><strong>Email :</strong> {{ utilisateur.email }}</p>
             <p><strong>Téléphone :</strong> {{ utilisateur.telephone }}</p>
             <a href=\"{{ path('utilisateur_modifier', { id: utilisateur.id }) }}\"
@@ -540,7 +535,7 @@ class __TwigTemplate_d97a20a8c9834a6e9e862d1888833c30 extends Template
                             {% if demande.article.utilisateur == utilisateur %}
                                 <tr>
                                     <td>{{ demande.article.titre }}</td>
-                                    <td>{{ demande.utilisateur.nom }} ({{ demande.utilisateur.email }})</td>
+                                    <td>{{ demande.utilisateur.pseudo }} ({{ demande.utilisateur.email }})</td>
                                     <td>
                                         <form method=\"post\"
                                               action=\"{{ path('article_confirmer', { id: demande.article.id }) }}\"

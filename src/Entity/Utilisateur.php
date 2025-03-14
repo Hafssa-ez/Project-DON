@@ -20,15 +20,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups('utilisateur:list')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
-    #[Groups('utilisateur:list')]
-    private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
-    #[Groups('utilisateur:list')]
-    private ?string $prenom = null;
 
     #[ORM\Column(length: 255, unique: true)]
     #[Assert\NotBlank(message: "Le pseudo est obligatoire.")]
@@ -87,27 +79,6 @@ public function getDemandes(): Collection
         return $this->id;
     }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-        return $this;
-    }
 
     public function getPseudo(): ?string
     {

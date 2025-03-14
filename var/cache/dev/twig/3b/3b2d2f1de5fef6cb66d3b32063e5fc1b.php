@@ -140,43 +140,30 @@ class __TwigTemplate_4f795ec5f67c5b917225825f8f4ceaff extends Template
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("utilisateur_create");
         yield "\" method=\"post\">
             <div class=\"user-details\">
+        
                 ";
-        // line 24
-        yield "                <div class=\"input-box\">
-                    <span class=\"details\">Votre Nom</span>
-                    <input type=\"text\" name=\"nom\" placeholder=\"EX: Kany\" required>
-                </div>
-
-                ";
-        // line 30
-        yield "                <div class=\"input-box\">
-                    <span class=\"details\">Votre Prénom</span>
-                    <input type=\"text\" name=\"prenom\" placeholder=\"EX: Jane\" required>
-                </div>
-
-                ";
-        // line 36
+        // line 25
         yield "                <div class=\"input-box\">
                     <span class=\"details\">Votre Email</span>
                     <input type=\"email\" name=\"email\" placeholder=\"EX: kanyjane@gmail.com\" required>
                 </div>
 
                 ";
-        // line 42
+        // line 31
         yield "                <div class=\"input-box\">
                     <span class=\"details\">Votre Pseudo</span>
                     <input type=\"text\" name=\"pseudo\" placeholder=\"EX: Kany_Jane\" required>
                 </div>
 
                 ";
-        // line 48
+        // line 37
         yield "                <div class=\"input-box\">
                     <span class=\"details\">Votre Téléphone</span>
                     <input type=\"tel\" name=\"telephone\" placeholder=\"EX: 0612131415\" pattern=\"[0-9]{10}\" required>
                 </div>
 
                 ";
-        // line 54
+        // line 43
         yield "                <div class=\"input-box\">
                     <span class=\"details\">Votre Mot de Passe</span>
                     <input type=\"password\" name=\"password\" placeholder=\"********\" required>
@@ -184,7 +171,7 @@ class __TwigTemplate_4f795ec5f67c5b917225825f8f4ceaff extends Template
             </div>
 
             ";
-        // line 61
+        // line 50
         yield "            <div class=\"gender-details\">
 
                 <input type=\"radio\" name=\"role\" value=\"ROLE_DONNEUR\" id=\"dot-1\" checked>
@@ -207,13 +194,13 @@ class __TwigTemplate_4f795ec5f67c5b917225825f8f4ceaff extends Template
             </div>
 
             ";
-        // line 83
+        // line 72
         yield "            <div class=\"button\">
                 <input type=\"submit\" value=\"S'inscrire\">
             </div>
 
             <p>Avez-vous déjà un compte ? <a href=\"";
-        // line 87
+        // line 76
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
         yield "\">Se connecter</a></p>
         </form>
@@ -250,7 +237,7 @@ class __TwigTemplate_4f795ec5f67c5b917225825f8f4ceaff extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  217 => 87,  211 => 83,  188 => 61,  180 => 54,  173 => 48,  166 => 42,  159 => 36,  152 => 30,  145 => 24,  140 => 21,  136 => 19,  127 => 17,  122 => 16,  113 => 14,  108 => 13,  102 => 8,  89 => 7,  77 => 4,  64 => 3,  41 => 1,);
+        return array (  204 => 76,  198 => 72,  175 => 50,  167 => 43,  160 => 37,  153 => 31,  146 => 25,  140 => 21,  136 => 19,  127 => 17,  122 => 16,  113 => 14,  108 => 13,  102 => 8,  89 => 7,  77 => 4,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -277,18 +264,7 @@ class __TwigTemplate_4f795ec5f67c5b917225825f8f4ceaff extends Template
     <div class=\"content\">
         <form id=\"form-inscription\"  action=\"{{ path('utilisateur_create') }}\" method=\"post\">
             <div class=\"user-details\">
-                {# Nom #}
-                <div class=\"input-box\">
-                    <span class=\"details\">Votre Nom</span>
-                    <input type=\"text\" name=\"nom\" placeholder=\"EX: Kany\" required>
-                </div>
-
-                {# Prénom #}
-                <div class=\"input-box\">
-                    <span class=\"details\">Votre Prénom</span>
-                    <input type=\"text\" name=\"prenom\" placeholder=\"EX: Jane\" required>
-                </div>
-
+        
                 {# Email #}
                 <div class=\"input-box\">
                     <span class=\"details\">Votre Email</span>

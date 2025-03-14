@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
-{% block title %}Profil de {{ utilisateur.nom }}{% endblock %}
+{% block title %}Profil de {{ utilisateur.pseudo }}{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
     <h2 class="text-center profil-titre mb-4">
         <i class="fas fa-user-circle"></i>
-        Profil de {{ utilisateur.nom }} {{ utilisateur.prenom }}
+        Profil de {{ utilisateur.pseudo }} 
     </h2>
 
     <!-- Coordonnées utilisateur -->
@@ -14,8 +14,8 @@
             <h4><i class="fas fa-id-card"></i> Coordonnées</h4>
         </div>
         <div class="card-body">
-            <p><strong>Nom :</strong> {{ utilisateur.nom }}</p>
-            <p><strong>Prénom :</strong> {{ utilisateur.prenom }}</p>
+       
+            <p><strong>Pseudo :</strong> {{ utilisateur.pseudo}}</p>
             <p><strong>Email :</strong> {{ utilisateur.email }}</p>
             <p><strong>Téléphone :</strong> {{ utilisateur.telephone }}</p>
             <a href="{{ path('utilisateur_modifier', { id: utilisateur.id }) }}"
@@ -104,7 +104,7 @@
                             {% if demande.article.utilisateur == utilisateur %}
                                 <tr>
                                     <td>{{ demande.article.titre }}</td>
-                                    <td>{{ demande.utilisateur.nom }} ({{ demande.utilisateur.email }})</td>
+                                    <td>{{ demande.utilisateur.pseudo }} ({{ demande.utilisateur.email }})</td>
                                     <td>
                                         <form method="post"
                                               action="{{ path('article_confirmer', { id: demande.article.id }) }}"
